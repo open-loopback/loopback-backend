@@ -8,6 +8,13 @@
       "when": 1765993613114,
       "tag": "0000_illegal_luke_cage",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1766059589551,
+      "tag": "0001_peaceful_ikaris",
+      "breakpoints": true
     }
   ]
 }
