@@ -17,30 +17,26 @@ export const feedbackRoute = new Hono()
   .get("/", (c) => {
     return c.json({ message: "Feedback route is accessible via GET" }, 200);
   })
-  .post(
-    "/",
-    sValidator("json", schema),
-    async (c) => {
-      const feedbackData = c.req.valid("json");
+  .post("/", sValidator("json", schema), async (c) => {
+    const feedbackData = c.req.valid("json");
 
-      // get the source from the database
-      const source = await db
-        .select()
-        .from(sources)
-        .where(eq(sources.sourceId, feedbackData.sourceId));
+    // get the source from the database
+    const source = await db
+      .select()
+      .from(sources)
+      .where(eq(sources.sourceId, feedbackData.sourceId));
 
-      if (source.length === 0) {
-        return c.json({ error: "Source not found" }, 404);
-      }
-
-      // add feedback
-      await db.insert(feedbacks).values({
-        message: feedbackData.feedbackText,
-        rating: feedbackData.rating,
-        source: source[0].id,
-        metadata: feedbackData.metadata,
-      });
-
-      return c.json({ message: "Feedback received" }, 201);
+    if (source.length === 0) {
+      return c.json({ error: "Source not found" }, 404);
     }
-  );
+
+    // add feedback
+    await db.insert(feedbacks).values({
+      message: feedbackData.feedbackText,
+      rating: feedbackData.rating,
+      source: source[0].id,
+      metadata: feedbackData.metadata,
+    });
+
+    return c.json({ message: "Feedback received" }, 201);
+  });

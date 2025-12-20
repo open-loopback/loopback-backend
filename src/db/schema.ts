@@ -20,8 +20,8 @@ export const sources = pgTable("sources", {
   name: text("name").notNull(),
   sourceId: text("source_id").notNull(),
   projectId: uuid("project_id")
-  .notNull()
-  .references(() => projects.id),
+    .notNull()
+    .references(() => projects.id),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
 });
