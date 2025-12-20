@@ -11,7 +11,13 @@ app.use('*', async (c, next) => {
 
 app.onError((err, c) => {
   console.error('App Error:', err)
-  return c.json({ error: err.message, stack: err.stack }, 500)
+  // If it's a database error, it might have more details
+  const errorDetails = {
+    message: err.message,
+    stack: err.stack,
+    ...(err as any), // Spread other properties if they exist (common in DB errors)
+  }
+  return c.json({ error: err.message, details: errorDetails }, 500)
 })
 
 
