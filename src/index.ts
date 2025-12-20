@@ -24,6 +24,10 @@ app.get('/', (c) => {
   return c.text(welcomeStrings.join('\n\n'))
 })
 
+
+app.get('/sources', async (c) => {
+  return c.json({ message: "Sources route is accessible via GET" }, 200)
+})
 app.route('/feedback', feedbackRoute)
 
 app.route('/health',healthRoute)
