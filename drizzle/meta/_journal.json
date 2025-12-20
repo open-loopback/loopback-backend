@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1765993613114,
-      "tag": "0000_illegal_luke_cage",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1766059589551,
-      "tag": "0001_peaceful_ikaris",
+      "when": 1766227863538,
+      "tag": "0000_flowery_wilson_fisk",
       "breakpoints": true
     }
   ]
