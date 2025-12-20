@@ -1,9 +1,19 @@
 import { Hono } from 'hono'
 import { feedbackRoute } from './routes/feedback.js'
+import { healthRoute } from './routes/health.js'
 
 const app = new Hono()
 
-app.route('/feedback', feedbackRoute)
+app.use('*', async (c, next) => {
+  console.log(`[${c.req.method}] ${c.req.url}`)
+  await next()
+})
+
+app.onError((err, c) => {
+  console.error('App Error:', err)
+  return c.json({ error: err.message, stack: err.stack }, 500)
+})
+
 
 const welcomeStrings = [
   'Hello Hono!',
@@ -13,5 +23,9 @@ const welcomeStrings = [
 app.get('/', (c) => {
   return c.text(welcomeStrings.join('\n\n'))
 })
+
+app.route('/feedback', feedbackRoute)
+
+app.route('/health',healthRoute)
 
 export default app
