@@ -1,6 +1,9 @@
 import { Hono } from 'hono'
+import { feedbackRoute } from './routes/feedback.js'
 
 const app = new Hono()
+
+app.route('/feedback', feedbackRoute)
 
 const welcomeStrings = [
   'Hello Hono!',

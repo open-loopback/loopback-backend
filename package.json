@@ -8,6 +8,9 @@
     "postgres": "^3.4.7"
   },
   "scripts": {
+    "build": "tsc",
+    "vercel-build": "bun run build",
+    "dev": "bun run --hot src/index.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
