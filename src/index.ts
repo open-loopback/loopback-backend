@@ -37,7 +37,6 @@ app.route("/feedback", feedbackRoute);
 
 app.route("/health", healthRoute);
 
-export default {
-  port: 5001,
-  fetch: app.fetch,
-};
+const port = process.env.PORT ? Number(process.env.PORT) : undefined;
+
+export default port ? { port, fetch: app.fetch } : app;
