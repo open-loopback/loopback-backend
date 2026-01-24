@@ -39,4 +39,8 @@ app.route("/health", healthRoute);
 
 const port = process.env.PORT ? Number(process.env.PORT) : undefined;
 
-export default port ? { port, fetch: app.fetch } : app;
+if (port) {
+  (app as any).port = port;
+}
+
+export default app;
